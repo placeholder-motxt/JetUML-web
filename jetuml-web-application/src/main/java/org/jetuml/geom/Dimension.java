@@ -25,26 +25,86 @@ import static java.lang.Math.max;
 
 /**
  * Represents a pair of width and height.
- * @param width The width. >= 0
- * @param height The height. >= 0
- */
-public record Dimension(int width, int height)
+* @param width The width. >= 0
+* @param height The height. >= 0
+*/
+// public record Dimension(int width, int height)
+public class Dimension
 {
+	private final int width;
+	private final int height;
+
 	public static final Dimension NULL = new Dimension(0, 0);
-	
+
+	/**
+	 * Constructs a new Dimension object.
+	*
+	* @param width The width. Must be >= 0.
+	* @param height The height. Must be >= 0.
+	*/
+	public Dimension(int width, int height)
+	{
+		assert width >= 0 && height >= 0;
+		this.width = width;
+		this.height = height;
+	}
+
+	/**
+	 * @return The width of this dimension.
+	*/
+	public int width()
+	{
+		return this.width;
+	}
+
+	/**
+	 * @return The height of this dimension.
+	*/
+	public int height()
+	{
+		return this.height;
+	}
+
 	/**
 	 * Creates a dimension that is the maximum of this dimension
-	 * and pDimension for both width and height.
-	 * 
-	 * @param pWidth The minimum width to include.
-	 * @param pHeight The minimum height to include.
-	 * @return A new dimension object that has the maximum
-	 *     width and height of either dimensions.
-	 * @pre pWidth >= 0 && pHeight >= 0;
-	 */
+	* and the provided width and height.
+	*
+	* @param pWidth The minimum width to include. Must be >= 0.
+	* @param pHeight The minimum height to include. Must be >= 0.
+	* @return A new Dimension object with the maximum width and height.
+	* @pre pWidth >= 0 && pHeight >= 0
+	*/
 	public Dimension include(int pWidth, int pHeight)
 	{
 		assert pWidth >= 0 && pHeight >= 0;
-		return new Dimension( max(width, pWidth), max(height, pHeight) );
+		return new Dimension(max(width, pWidth), max(height, pHeight));
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass())
+		{
+			return false;
+		}
+		Dimension other = (Dimension) obj;
+		return width == other.width && height == other.height;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return java.util.Objects.hash(width, height);
+	}
+
+	@Override
+	public String toString()
+	{
+		return "Dimension[width=" + width + ", height=" + height + "]";
 	}
 }
+ 
