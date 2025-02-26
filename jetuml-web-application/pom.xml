@@ -42,4 +42,12 @@
 
     </dependencies>
 
+    <build>
+        <testResources>
+            <testResource>
+                <directory>testdata</directory>
+            </testResource>
+        </testResources>
+    </build>
+
 </project>
