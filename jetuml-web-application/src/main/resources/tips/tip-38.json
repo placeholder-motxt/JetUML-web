@@ -1,0 +1,12 @@
+{ 
+  "title": "Dark Mode",
+  "content": [ 
+    { "text": "You can turn dark mode on or off by navigating to the menu command View | Dark Mode." },
+    { "image": "tip38.png"}
+  ],
+  "tags": [
+    { "topic": "settings"},
+    { "level": "beginner"},
+    { "diagram": "all"}
+  ]
+}
