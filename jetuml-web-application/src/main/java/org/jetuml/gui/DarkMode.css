@@ -1,0 +1,74 @@
+.root 
+{ 
+    -fx-accent: #1e74c6;
+    -fx-focus-color: -fx-accent;
+    -fx-base: #1b1f21;
+    -fx-control-inner-background: derive(-fx-base, 35%);
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
+}
+
+.label
+{
+    -fx-text-fill: lightgray;
+}
+
+.context-menu {
+    -fx-border-color: derive(-fx-base, 60%);
+}
+
+.separator .line 
+{ 
+    -fx-background-color: #3C3C3C;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.scroll-bar
+{
+    -fx-background-color: derive(-fx-base, 45%);
+}
+
+.button:default 
+{
+	-fx-base: #5077bd;
+	-fx-text-fill: lightgray;
+}
+
+.welcome-tab-panel
+{
+	-fx-padding: 20px;
+}
+
+.welcome-tab-panel .panel-title
+{
+	-fx-padding: 0px 0px 3px 0px;
+	-fx-font-size: 20pt;
+	-fx-border-width: 0 0 3 0; 
+	-fx-border-color: black; 
+	-fx-border-insets: 0 0 15px 15px;
+}
+
+.welcome-tab-panel .button
+{
+	-fx-background-color: transparent;
+	-fx-font-size: 17pt;
+	-fx-text-fill: white;
+}
+
+.welcome-tab-panel .button:hover
+{
+	-fx-text-fill: gray;
+}
+
+.welcome-tab-footer
+{
+	-fx-alignment: center;	
+	-fx-padding: 0 0 10px 0;
+}
+
+.tip-menu
+{
+	-fx-background-color: -fx-base;
+	-fx-border-color: black; 
+	-fx-border-style: solid;
+}
