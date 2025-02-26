@@ -1,0 +1,1 @@
+webfx-kit-javafxgraphics-peers-gwt-j2cl:jar:file:///C:/Users/user/.m2/repository/dev/webfx/webfx-kit-javafxgraphics-peers-gwt-j2cl/0.1.0-SNAPSHOT/webfx-kit-javafxgraphics-peers-gwt-j2cl-0.1.0-SNAPSHOT-sources.jar!/META-INF/webfx
