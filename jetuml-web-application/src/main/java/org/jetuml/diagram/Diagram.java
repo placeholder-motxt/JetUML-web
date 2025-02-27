@@ -77,7 +77,10 @@ public final class Diagram implements DiagramData
 		}
 
 		// Reassign diagram
-		copy.aEdges.forEach(edge -> edge.connect(edge.start(), edge.end()));
+		for( Edge edge : copy.aEdges )
+		{
+			edge.connect(edge.start(), edge.end());
+		}
 		return copy;
 	}
 
@@ -119,7 +122,10 @@ public final class Diagram implements DiagramData
 	public List<Node> allNodes()
 	{
 		List<Node> allNodes = new ArrayList<>();
-		rootNodes().forEach(node -> collectNodes(node, allNodes));
+		for(Node node : rootNodes() )
+		{
+			collectNodes(node, allNodes);
+		}
 		return allNodes;
 	}
 	
@@ -129,7 +135,10 @@ public final class Diagram implements DiagramData
 	private static void collectNodes(Node pParent, List<Node> pNodes)
 	{
 		pNodes.add(pParent);
-		pParent.getChildren().forEach(child -> collectNodes(child, pNodes));
+		for( Node child : pParent.getChildren() )
+		{
+			collectNodes(child, pNodes);
+		}
 	}
 
 	@Override
@@ -257,10 +266,15 @@ public final class Diagram implements DiagramData
 	public List<Edge> edgesTo(Node pNode, Class<? extends Edge> pOfType)
 	{
 		assert pNode != null && pOfType != null;
-		return aEdges.stream()
-				.filter(pOfType::isInstance)
-				.filter(edge -> edge.end() == pNode)
-				.toList();
+		List<Edge> result = new ArrayList<>();
+		for( Edge edge : aEdges )
+		{
+			if( pOfType.isInstance(edge) && edge.end() == pNode )
+			{
+				result.add(edge);
+			}
+		}
+		return result;
 	}
 
 	/**

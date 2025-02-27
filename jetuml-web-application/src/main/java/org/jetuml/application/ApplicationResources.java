@@ -36,6 +36,8 @@ import org.jetuml.annotations.Singleton;
  * The instance is exported as a public field instead of a static method
  * to makes its more convenient and clear when statically imported.
  */
+
+// TODO: Change ResourceBundle to something compatible with GWT
 @Singleton
 public final class ApplicationResources
 {

@@ -91,6 +91,5 @@ public final class Violation
 	public String toString()
 	{
 		return "[" + aCategory.name().toLowerCase() + " Violation: " + description();
-//		return String.format("[%s Violation: %s", aCategory.name().toLowerCase(), description());
 	}
 }

@@ -229,7 +229,11 @@ public final class ViewportProjection
 	@Override
 	public String toString()
 	{
-		return String.format("[ViewportProjection: vp=%dx%d; canvas=%dx%d; pos=%.2f, %.2f]", aViewportWidth, aViewportHeight,
-				aCanvasWidth, aCanvasHeight, aHValue, aVValue);
+		return "[ViewportProjection: vp=" + aViewportWidth + "x" + aViewportHeight 
+						+ ";; canvas=" + aCanvasWidth + "x" + aCanvasHeight 
+						+ "; pos=" + Math.round(aHValue * Math.pow(10, 2)) / Math.pow(10, 2) 
+						+ ", " + Math.round(aVValue * Math.pow(10, 2)) / Math.pow(10, 2) + "]";
+		// return String.format("[ViewportProjection: vp=%dx%d; canvas=%dx%d; pos=%.2f, %.2f]", aViewportWidth, aViewportHeight,
+				// aCanvasWidth, aCanvasHeight, aHValue, aVValue);
 	}
 }

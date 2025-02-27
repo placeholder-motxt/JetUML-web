@@ -92,20 +92,19 @@ abstract class AbstractDiagramValidator implements DiagramValidator
 	public final Optional<Violation> validate()
 	{
 		Optional<Violation> result = validateElementTypes();
-		if (!result.isPresent()) {
+		if( !result.isPresent() )
+		{
 		    result = validatePointNodes();
 		}
-		if (!result.isPresent()) {
+		if( !result.isPresent() )
+		{
 		    result = validateDiagramNodes();
 		}
-		if (!result.isPresent()) {
+		if( !result.isPresent() )
+		{
 		    result = validateSemantics();
 		}
 		return result;
-//		return validateElementTypes()
-//				.or(this::validatePointNodes)
-//				.or(this::validateDiagramNodes)
-//				.or(this::validateSemantics);
 	}
 	
 	private Optional<Violation> validateElementTypes()
@@ -146,54 +145,49 @@ abstract class AbstractDiagramValidator implements DiagramValidator
 	
 	private Optional<Violation> validateSemantics()
 	{
-		for (Edge edge : aDiagram.edges()) {
+		for( Edge edge : aDiagram.edges() )
+		{
 			Optional<Violation> violation = validateAllConstraintsFor(edge);
-			if (violation.isPresent()) {
+			if( violation.isPresent() )
+			{
 				return violation;
 			}
 		}
 		return Optional.empty();
-//		return aDiagram.edges().stream()
-//				.map(edge -> validateAllConstraintsFor(edge))
-//				.filter(Optional::isPresent)
-//				.map(Optional::get)
-//				.findFirst();
 	}
 	
 	private Optional<Violation> validateAllConstraintsFor(Edge pEdge)
 	{
 		// We retrieve the first constraint that is not satisfied (if it exists)
-		for (EdgeConstraint edgeConstraint : aConstraints) {
-			if (!edgeConstraint.satisfied(pEdge, aDiagram)) {
+		for( EdgeConstraint edgeConstraint : aConstraints )
+		{
+			if( !edgeConstraint.satisfied(pEdge, aDiagram) )
+			{
 				return Optional.of(Violation.newSemanticViolation(edgeConstraint));
 			}
 		}
 		return Optional.empty();
-//		return aConstraints.stream()
-//				.filter(constraint -> !constraint.satisfied(pEdge, aDiagram))
-//				.findFirst()
-//				.map(constraint -> Violation.newSemanticViolation(constraint));
 	}
 	
 	private boolean hasValidElementTypes()
 	{
-		for (Node node : aDiagram.allNodes()) {
-		    if (!aValidNodeTypes.contains(node.getClass())) {
+		for( Node node : aDiagram.allNodes() )
+		{
+		    if( !aValidNodeTypes.contains(node.getClass()) )
+			{
 		        return false;
 		    }
 		}
 
-		for (Edge edge : aDiagram.edges()) {
-		    if (!aValidEdgeTypes.contains(edge.getClass())) {
+		for( Edge edge : aDiagram.edges() )
+		{
+		    if( !aValidEdgeTypes.contains(edge.getClass()) )
+			{
 		        return false;
 		    }
 		}
 		
 		return true;
-//		return aDiagram.allNodes().stream()
-//					.allMatch(node -> aValidNodeTypes.contains(node.getClass())) &&
-//			   aDiagram.edges().stream()
-//			   		.allMatch(edge -> aValidEdgeTypes.contains(edge.getClass()));
 	}
 
 	@TemplateMethod
@@ -207,17 +201,17 @@ abstract class AbstractDiagramValidator implements DiagramValidator
 	 */
 	private boolean hasValidPointNodes()
 	{
-		for (Node node : diagram().rootNodes()) {
-		    if (node instanceof PointNode) {
-		        if (!diagram().edgesConnectedTo(node).iterator().hasNext()) {
+		for( Node node : diagram().rootNodes() )
+		{
+		    if( node instanceof PointNode )
+			{
+		        if( !diagram().edgesConnectedTo(node).iterator().hasNext() )
+				{
 		            return false;
 		        }
 		    }
 		}
 		return true;
-//		return diagram().rootNodes().stream()
-//			.filter(PointNode.class::isInstance)
-//			.allMatch(node -> diagram().edgesConnectedTo(node).iterator().hasNext());
 	}
 	
 	/**

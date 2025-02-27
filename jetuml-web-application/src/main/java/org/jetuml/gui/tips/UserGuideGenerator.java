@@ -45,6 +45,7 @@ import org.jetuml.gui.tips.TipLoader.Tip;
  */
 public final class UserGuideGenerator
 {
+	// TODO: GWT does not support java.nio.file
 	private static final Path INPUT_FILE_TOPICS = Paths.get("docs", "user-guide-topics-template.txt");
 	private static final Path INPUT_FILE_LEVELS = Paths.get("docs", "user-guide-levels-template.txt");
 	private static final Path INPUT_FILE_DIAGRAMS = Paths.get("docs", "user-guide-diagrams-template.txt");

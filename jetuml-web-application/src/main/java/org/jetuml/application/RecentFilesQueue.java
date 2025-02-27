@@ -28,7 +28,7 @@ import java.util.LinkedList;
  * A fixed-sized queue for storing a list of 
  * files recently manipulated by the application.
  */
-public class RecentFilesQueue implements Iterable<File>
+public class RecentFilesQueue implements Iterable<File> // TODO: GWT does not support java.io.File
 {
 	private static final int CAPACITY = 5;
 	

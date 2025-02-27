@@ -229,6 +229,7 @@ public final class Direction
 	@Override
 	public String toString()
 	{
-		return String.format("[Direction: %d degrees]", aAngleInDegrees);
+		return "[Direction: " + aAngleInDegrees + " degrees]";
+		// return String.format("[Direction: %d degrees]", aAngleInDegrees);
 	}
 }

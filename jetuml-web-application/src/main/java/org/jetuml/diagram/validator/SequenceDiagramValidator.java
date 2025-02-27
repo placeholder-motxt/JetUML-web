@@ -77,14 +77,14 @@ public class SequenceDiagramValidator extends AbstractDiagramValidator
 	@Override
 	protected boolean hasValidDiagramNodes()
 	{
-		for (Node node : diagram().rootNodes()) {
-		    if (node.getClass() == CallNode.class) {
+		for( Node node : diagram().rootNodes() )
+		{
+		    if( node.getClass() == CallNode.class )
+			{
 		        return false;
 		    }
 		}
 		return maxOneRoot();
-//		return diagram().rootNodes().stream()
-//				.allMatch(node -> node.getClass() != CallNode.class) && maxOneRoot();
 	}
 	
 	/*
@@ -93,23 +93,21 @@ public class SequenceDiagramValidator extends AbstractDiagramValidator
 	private boolean maxOneRoot()
 	{
 		int count = 0;
-		for (Node node : diagram().allNodes()) {
-		    if (node instanceof CallNode) {
+		for( Node node : diagram().allNodes() )
+		{
+		    if( node instanceof CallNode )
+			{
 		        List<Edge> callers = diagram().edgesTo(node, CallEdge.class);
-		        if (callers.size() == 0) {
+		        if( callers.size() == 0 )
+				{
 		            count++;
-		            if (count > 1) {
+		            if( count > 1 )
+					{
 		                return false;
 		            }
 		        }
 		    }
 		}
 		return true;
-//		return diagram().allNodes().stream()							// Nodes
-//				.filter(CallNode.class::isInstance)						// Call nodes
-//				.map(node -> diagram().edgesTo(node, CallEdge.class))	// Lists of callers to call nodes
-//				.mapToInt(List::size)									// Size of such lists
-//				.filter(nbOfCalleers -> nbOfCalleers == 0)				// Number of cases call nodes with no callers
-//				.count() <= 1;
 	}
 }

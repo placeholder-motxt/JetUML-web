@@ -20,11 +20,8 @@
  *******************************************************************************/
 package org.jetuml.application;
 
-import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toSet;
-import static java.util.stream.StreamSupport.stream;
-
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -128,18 +125,15 @@ public final class Clipboard
 	private static List<Edge> copyEdges(Iterable<DiagramElement> pSelection)
 	{
 		List<Edge> result = new ArrayList<>();
-		for (DiagramElement de : pSelection) {
-			if (de instanceof Edge) {
+		for( DiagramElement de : pSelection )
+		{
+			if( de instanceof Edge )
+			{
 				Edge edge = (Edge) de;
 				result.add(edge.clone());
 			}
 		}
 		return result;
-//		return stream(pSelection.spliterator(), false)
-//			.filter(Edge.class::isInstance)
-//			.map(Edge.class::cast)
-//			.map(Edge::clone)
-//			.collect(toList());
 	}
 	
 	/**
@@ -152,12 +146,19 @@ public final class Clipboard
 	 */
 	public boolean overlapsWithElementOf(Diagram pDiagram)
 	{
-		Set<Point> positions = aNodes.stream()
-				.map(Node::position)
-				.collect(toSet());
-		return pDiagram.allNodes().stream()
-				.map(Node::position)
-				.anyMatch(positions::contains);
+		Set<Point> positions = new HashSet<>();
+		for( Node node : aNodes )
+		{
+			positions.add(node.position());
+		}
+		for( Node node : pDiagram.allNodes() )
+		{
+			if( positions.contains(node.position()) )
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/*
@@ -269,9 +270,13 @@ public final class Clipboard
 	 */
 	private void removeDanglingReferencesToParents()
 	{
-		aNodes.stream()
-			.filter(Node::hasParent)
-			.forEach(Node::unlink);
+		for (Node node : aNodes)
+		{
+			if( node.hasParent() )
+			{
+				node.unlink();
+			}
+		}
 	}
 	
 	/**
@@ -313,6 +318,7 @@ public final class Clipboard
 		{
 			return true;
 		}
+
 		return pDiagram.getPrototypes().stream()
 				.map(Object::getClass)
 				.anyMatch(Predicate.isEqual(pElement.getClass()));
